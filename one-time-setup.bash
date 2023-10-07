@@ -47,5 +47,5 @@ mamba install compilers cmake pkg-config make ninja colcon-common-extensions cat
 pip install -U colcon-common-extensions -y
 
 mamba activate grr_ros_env
+cd ros2ws/
 colcon build --symlink-install
-
