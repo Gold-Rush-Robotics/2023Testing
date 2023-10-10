@@ -6,8 +6,11 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 # find dependencies
-set(Python3_NumPy_INCLUDE_DIRS NumPy ~/mambaforge/envs/grr_ros_env/bin/python)
-set(Python3_FIND_GENERIC_NAMES FIRST)
+
+set(Python3_FIND_STRATEGY LOCATION)
+
+find_package(Python3 REQUIRED)
+
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
