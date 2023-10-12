@@ -32,7 +32,8 @@ endif()
 
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/Motors.msg"
+  "msg/Motor.msg"
+  "msg/MotorSet.msg"
 )
 
 ament_package()
