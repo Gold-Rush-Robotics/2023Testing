@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'roboclaw = grr_hardware.motors:main'
+            'robot = grr_hardware.robot:main'
         ],
     },
 )
