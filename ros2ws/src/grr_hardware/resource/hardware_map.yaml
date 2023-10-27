@@ -1,0 +1,24 @@
+map-name: default
+
+motors:
+  fl:
+    attachment: 5
+    address: 128
+    m1: yes
+    inverted: no
+  fr:
+    attachment: 5
+    address: 129
+    m1: yes
+    inverted: no
+  bl:
+    attachment: 5
+    address: 128
+    m1: no
+    inverted: no
+  br:
+    attachment: 5
+    address: 129
+    m1: no
+    inverted: no
+
