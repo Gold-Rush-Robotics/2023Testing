@@ -35,16 +35,17 @@ class Robot(Node):
         
     def motor_callback(self, msg: MotorSet):
         for motor in msg.data:
+            self.get_logger().info(f"add: {motor.address} m1: {motor.m1} speed: {motor.speed}")
             if motor.speed > 0:
                 if motor.m1:
-                    self.roboclaw.ForwardM1(motor.address, motor.speed)
+                    self.roboclaw.ForwardM1(motor.address, min(int(motor.speed*127), 127))
                 else:
-                    self.roboclaw.ForwardM2(motor.address, motor.speed)
+                    self.roboclaw.ForwardM2(motor.address, min(int(motor.speed*127), 127))
             else:
                 if motor.m1:
-                    self.roboclaw.BackwardM1(motor.address, motor.speed)
+                    self.roboclaw.BackwardM1(motor.address, min(int(abs(motor.speed)*127), 127))
                 else:
-                    self.roboclaw.BackwardM2(motor.address, motor.speed)
+                    self.roboclaw.BackwardM2(motor.address, min(int(abs(motor.speed)*127), 127))
             
         
 def main(args=None):
