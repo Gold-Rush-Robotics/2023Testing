@@ -20,10 +20,10 @@ class Drive(Node):
     
     def drive_motors(self, fl:float, fr:float, bl:float, br:float):
         motors = self.HWMAP["motors"]
-        front_left = Motor(address=motors["fl"]["address"], m1=motors["fl"]["m1"], speed=fl * (-1 if motors["fl"]["reversed"] else 1))
-        front_right = Motor(address=motors["fr"]["address"], m1=motors["fr"]["m1"], speed=fr * (-1 if motors["fr"]["reversed"] else 1))
-        back_left = Motor(address=motors["bl"]["address"], m1=motors["bl"]["m1"], speed=bl * (-1 if motors["bl"]["reversed"] else 1))
-        back_right = Motor(address=motors["br"]["address"], m1=motors["br"]["m1"], speed=br * (-1 if motors["br"]["reversed"] else 1))
+        front_left = Motor(address=motors["fl"]["address"], m1=motors["fl"]["m1"], speed=fl * (-1 if motors["fl"]["inverted"] else 1))
+        front_right = Motor(address=motors["fr"]["address"], m1=motors["fr"]["m1"], speed=fr * (-1 if motors["fr"]["inverted"] else 1))
+        back_left = Motor(address=motors["bl"]["address"], m1=motors["bl"]["m1"], speed=bl * (-1 if motors["bl"]["inverted"] else 1))
+        back_right = Motor(address=motors["br"]["address"], m1=motors["br"]["m1"], speed=br * (-1 if motors["br"]["inverted"] else 1))
         self.motor_publish.publish(MotorSet(data=[front_left, front_right, back_left, back_right]))
     
     def drive_mecanum(self, forward, strafe, rotate):
