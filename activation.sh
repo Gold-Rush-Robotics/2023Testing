@@ -8,3 +8,4 @@ fi
 
 mamba activate grr_ros_env
 source ros2ws/install/setup.sh
+sudo chmod 666 /dev/ttyS0
