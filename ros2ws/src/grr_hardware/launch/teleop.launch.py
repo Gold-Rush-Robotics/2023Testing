@@ -49,6 +49,11 @@ def generate_launch_description():
             executable='teleop',
             name='teleop'
         ),
+        Node(
+            package='grr_hardware',
+            executable='drive',
+            name='drive'
+        )
     ]
 
     return LaunchDescription(launch_args + nodes)
