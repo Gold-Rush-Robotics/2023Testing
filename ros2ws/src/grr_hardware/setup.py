@@ -22,7 +22,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'robot = grr_hardware.robot:main'
+            'robot = grr_hardware.robot:main',
+            'drive = grr_hardware.drive:main'
         ],
     },
 )
