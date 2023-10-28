@@ -13,7 +13,7 @@ class Teleop(Node):
         self.subscriber = self.create_subscription(Joy, "joy", self.joyCallback, 10)
         
     def joyCallback(self, data:Joy):
-        self.get_logger().info(data)
+        self.get_logger().info(f"axes: {data.axes}\nbuttons: {data.buttons}")
 
 def main():
     rclpy.init()
