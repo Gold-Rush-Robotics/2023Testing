@@ -23,7 +23,8 @@ setup(
     entry_points={
         'console_scripts': [
             'robot = grr_hardware.robot:main',
-            'drive = grr_hardware.drive:main'
+            'drive = grr_hardware.drive:main',
+            'teleop = grr_hardware.teleop:main'
         ],
     },
 )
