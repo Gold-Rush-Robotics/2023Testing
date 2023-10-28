@@ -19,7 +19,7 @@ from launch.substitutions import (
     TextSubstitution,
 )
 
-from launch_ros.actions import ComposableNodeContainer
+from launch_ros.actions import ComposableNodeContainer, Node
 from launch_ros.descriptions import ComposableNode
 
 
@@ -43,15 +43,12 @@ def generate_launch_description():
                     plugin='joy::Joy',
                     name='joy',
                 ),
-                ComposableNode(
-                    package='p9n_example',
-                    plugin='p9n_example::DisplayNode',
-                    name='display_node',
-                    parameters=[{
-                        'hw_type': LaunchConfiguration('hw_type')
-                    }]
-                )
             ]),
+        Node(
+            package='grr_hardware',
+            executable='teleop',
+            name='teleop'
+        ),
     ]
 
     return LaunchDescription(launch_args + nodes)
