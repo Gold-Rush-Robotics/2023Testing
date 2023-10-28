@@ -53,6 +53,11 @@ def generate_launch_description():
             package='grr_hardware',
             executable='drive',
             name='drive'
+        ),
+        Node(
+            package='grr_hardware',
+            executable='robot',
+            name='robot'
         )
     ]
 
