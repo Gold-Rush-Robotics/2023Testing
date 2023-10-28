@@ -3,18 +3,18 @@ map-name: default
 motors:
   fl:
     attachment: 5
-    address: 128
-    m1: yes
-    inverted: no
+    address: 130
+    m1: no
+    inverted: yes
   fr:
     attachment: 5
     address: 129
     m1: yes
-    inverted: no
+    inverted: yes
   bl:
     attachment: 5
-    address: 128
-    m1: no
+    address: 130
+    m1: yes
     inverted: no
   br:
     attachment: 5
