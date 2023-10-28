@@ -1,3 +1,4 @@
+from numpy import trunc
 from typing import List
 import rclpy
 from rclpy.context import Context
@@ -35,23 +36,24 @@ class Robot(Node):
         
     def motor_callback(self, msg: MotorSet):
         for motor in msg.data:
-            self.get_logger().info(f"add: {motor.address} m1: {motor.m1} speed: {motor.speed}")
             if motor.speed > 0:
                 if motor.m1:
-                    self.roboclaw.ForwardM1(motor.address, min(int(motor.speed*127), 127))
+                    self.roboclaw.ForwardM1(motor.address, min(int(motor.speed*126), 126))
                 else:
-                    self.roboclaw.ForwardM2(motor.address, min(int(motor.speed*127), 127))
+                    self.roboclaw.ForwardM2(motor.address, min(int(motor.speed*126), 126))
             else:
                 if motor.m1:
-                    self.roboclaw.BackwardM1(motor.address, min(int(abs(motor.speed)*127), 127))
+                    self.roboclaw.BackwardM1(motor.address, min(int(abs(motor.speed)*126), 126))
                 else:
-                    self.roboclaw.BackwardM2(motor.address, min(int(abs(motor.speed)*127), 127))
+                    self.roboclaw.BackwardM2(motor.address, min(int(abs(motor.speed)*126), 126))
+                    
             
         
 def main(args=None):
     rclpy.init(args=args)
     rci = Robot()
     rclpy.spin(rci)
+        
     rci.destroy_node()
     rclpy.shutdown()
     

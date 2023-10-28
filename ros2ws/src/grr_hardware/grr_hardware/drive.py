@@ -27,14 +27,16 @@ class Drive(Node):
         self.motor_publish.publish(MotorSet(data=[front_left, front_right, back_left, back_right]))
     
     def drive_mecanum(self, forward, strafe, rotate):
+        #self.get_logger().info(f"f: {forward: .3f}, s: {strafe: .3f}, r:{rotate: .3f}")
         fl = forward + strafe + rotate
         bl = forward - strafe + rotate
         fr = forward - strafe - rotate
         br = forward + strafe - rotate
+        #self.get_logger().info(f"fl: {fl :.3f} fr: {fr:.3f} bl: {bl:.3f} br: {br:.3f}")
         motors = [fl, fr, bl, br]
         max_val = max(motors)
         if max_val >= 1:
-            motors = [x/max_val for x in motors]
+            motors = [x/float(max_val) for x in motors]
         self.drive_motors(motors[0], motors[1], motors[2], motors[3])
         
     def drive_callback(self, data: Twist):

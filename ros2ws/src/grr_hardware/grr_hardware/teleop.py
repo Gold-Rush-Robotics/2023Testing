@@ -21,11 +21,20 @@ class Teleop(Node):
         lup = data.axes[1]
         rside = data.axes[3]
         rup = data.axes[4]
-        strafe = lside
-        forward = lup
-        rotate = rside
+        scale = 4.
+        if data.buttons[7]:
+            if data.buttons[6]:
+                scale = 1.
+            else:
+                scale = 2.
+        strafe = -lside / scale
+        forward = lup / scale
+        rotate = -rside / scale
         if(strafe or forward or rotate):
             self.enablePub.publish(Enable(attachment=5, enable=True))
+        else:
+            #self.enablePub.publish(Enable(attachment=5, enable=False))
+            pass
 
         twist = Twist(linear=Vector3(x=strafe, y=forward,z=0.0), angular=Vector3(x=0.0, y=0.0, z=rotate))
         self.twistPub.publish(twist)
