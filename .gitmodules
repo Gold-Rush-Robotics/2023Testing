@@ -1,0 +1,3 @@
+[submodule "ros2ws/src/PlayStation-JoyInterface-ROS2"]
+	path = ros2ws/src/PlayStation-JoyInterface-ROS2
+	url = git@github.com:HarvestX/PlayStation-JoyInterface-ROS2.git
