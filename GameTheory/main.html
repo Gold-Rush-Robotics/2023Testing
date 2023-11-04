@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .cell {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            display: inline-block;
+            text-align: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="gameBoard">
+</div>
+<p>Total Score: <span id="totalScore">0</span></p>
+<label for="timerInput">Enter Time (seconds):</label>
+<input type="text" id="timerInput" placeholder="0">
+<label for="timerInput">Minutes and Seconds: </label>
+<text id="timerOutput">0</text>
+
+
+<script>
+    const gameBoard = document.getElementById("gameBoard");
+    const totalScoreDisplay = document.getElementById("totalScore");
+    const timerInput = document.getElementById("timerInput");
+    const timerOutput = document.getElementById("timerOutput");
+
+    function updateScore(){
+        return totalScore + pointsEarned;
+    }
+    let pointsEarned = 0;
+    let totalScore = 0;
+    // Create 5 large boxes (3 points each) and 3 small boxes (5 points each)
+    const boxTypes = ["large", "large", "large", "large", "large", "small", "small", "small"];
+
+    boxTypes.forEach((boxType) => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        if (boxType === "large") {
+            cell.innerText = "3";
+        } else if (boxType === "small") {
+            cell.innerText = "5";
+        }
+        cell.addEventListener("click", () => {
+            const cellValue = parseInt(cell.innerText, 10);
+            if (cell.style.backgroundColor === "lightgreen") {
+                // If cell is already clicked, subtract the value
+                totalScore -= cellValue;
+                cell.style.backgroundColor = "white";
+            } else {
+                // If cell is not clicked, add the value
+                totalScore += cellValue;
+                cell.style.backgroundColor = "lightgreen";
+            }
+            totalScoreDisplay.innerText = updateScore();
+        });
+        gameBoard.appendChild(cell);
+    });
+
+    timerInput.addEventListener("input", () => {
+        const inputTime = timerInput.value;
+        const [minutes, seconds] = [Math.floor(inputTime / 60), (inputTime % 60).toFixed(2)].map(Number);
+        timerOutput.innerText = minutes + ": " + seconds;
+
+        if (inputTime <= 105) {
+            pointsEarned = 30;
+        } else if (inputTime <= 120) {
+            pointsEarned = 25;
+        } else if (inputTime <= 135) {
+            pointsEarned = 20;
+        } else if (inputTime <= 150) {
+            pointsEarned = 15;
+        } else if (inputTime <= 165) {
+            pointsEarned = 10;
+        } else if (inputTime <= 180) {
+            pointsEarned = 5;
+        }
+        totalScoreDisplay.innerText = updateScore();
+    });
+</script>
+</body>
+</html>
