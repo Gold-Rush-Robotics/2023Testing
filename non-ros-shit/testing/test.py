@@ -1,0 +1,53 @@
+from drivetraintest import Drivetrain
+import digitalio
+import board
+
+d = Drivetrain()
+
+input("Enter to Arm")
+
+enablePin = digitalio.DigitalInOut(board.D16)
+enablePin.direction = digitalio.Direction.OUTPUT
+enablePin.value = False
+
+speed = 0.5
+turnRatio = 0.5
+voltageLimit = 3.4
+
+def end():
+    enablePin.value = True
+    d.driveM(0, 0, 0, 0)
+
+def checkVoltage():
+    volt = d.getCellVoltage()
+    if volt <= voltageLimit:
+        print("VOLTAGE BELOW LIMIT SWAP BATTERY")
+        end()
+        exit(1)
+    return volt
+
+try:
+    while True:
+        turnSpeed = speed * turnRatio
+        key = input(f"SPEED: {speed} TurnSpeed: {turnSpeed} Voltage: {checkVoltage():.2f}V\nWhat direction to drive? WASD for cardinal directions and Q/E for rotation, X to stop: enter a number for a new speed\n>")
+        try:
+            speed = float(key)
+        except ValueError:
+            if key == "w":
+                print("Forward")
+                d.driveMecanum(speed, 0, 0)
+            elif key == "a":
+                d.driveMecanum(0, -speed, 0)
+            elif key == "s":
+                d.driveMecanum(-speed, 0, 0)
+            elif key == "d":
+                d.driveMecanum(0, speed, 0)
+            elif key == "q":
+                d.driveMecanum(0, 0, turnSpeed)
+            elif key == "e":
+                d.driveMecanum(0, 0, -turnSpeed)
+            else:
+                print(key)
+                d.driveM(0, 0, 0, 0)
+except KeyboardInterrupt:
+    end()
